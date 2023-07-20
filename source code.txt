@@ -1,0 +1,159 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include<iostream>
+using namespace std;
+
+
+struct Node
+{
+  int regno;
+	struct Node* next;
+};
+
+Node *newNode(int g)
+{
+	struct Node* temp = new Node;
+	temp->regno = g;
+	temp->next = NULL;
+	return temp;
+}
+
+// function to find out middle element
+struct Node* middle(Node* start, Node* last)
+{
+	if (start == NULL)
+		return NULL;
+
+	struct Node* slow = start;
+	struct Node* fast = start -> next;
+
+	while (fast != last)
+	{
+		fast = fast -> next;
+		if (fast != last)
+		{
+			slow = slow -> next;
+			fast = fast -> next;
+		}
+	}
+
+	return slow;
+}
+
+// Function for implementing the BinarySearch on linked list
+struct Node* binarySearch(Node *head, int value)
+{
+	struct Node* start = head;
+	struct Node* last = NULL;
+
+	do
+	{
+		// Find middle
+		Node* mid = middle(start, last);
+
+		// If middle is empty
+		if (mid == NULL)
+			return NULL;
+
+		// If value is present at middle
+		if (mid -> regno == value)
+			return mid;
+
+		// If value is more than mid
+		else if (mid -> regno < value)
+			start = mid -> next;
+
+		// If the value is less than mid.
+		else
+			last = mid;
+
+	} while (last == NULL ||
+			last != start);
+
+	// value not present
+	return NULL;
+}
+
+// Driver Code
+int main()
+{
+  int regno;
+  cout<<"Enter the last four digits of Registration number."<<endl;
+  cin>>regno;
+	Node *head = newNode(4235);
+	head->next = newNode(5674);
+	head->next->next = newNode(7897);
+	head->next->next->next = newNode(8547);
+	head->next->next->next->next = newNode(8987);
+	head->next->next->next->next->next = newNode(9989);
+  head->next->next->next->next->next->next = newNode(9999);
+	int value = regno;
+	if (binarySearch(head, value) == NULL)
+		cout<<"Record not found";
+  else
+  {
+    printf("Record is found\n");
+    {
+    if(regno==5674)
+   {
+    cout<<"Vehicle Registration number : KA04JD5674"<<endl;
+    cout<<"Owner Name : John"<<endl;
+    cout<<"State : KARNATAKA"<<endl;
+    cout<<"RTO : Yeshwanthpur"<<endl;
+    cout<<"Vehicle Type : Car"<<endl;
+   }
+   if(regno==4235)
+   {
+     cout<<"Vehicle Registration number : KA12AK4235"<<endl;
+    cout<<"Owner Name : Shanti"<<endl;
+    cout<<"State : KARNATAKA"<<endl;
+    cout<<"RTO : Coorg"<<endl;
+    cout<<"Vehicle Type : Car"<<endl;
+   }
+   if(regno==7897)
+   {
+    cout<<"Vehicle Registration number : KA51PI7897"<<endl;
+    cout<<"Owner Name : Srinivas"<<endl;
+    cout<<"State : KARNATAKA"<<endl;
+    cout<<"RTO : Yelahanka"<<endl;
+    cout<<"Vehicle Type : Bike"<<endl;
+   }
+   if(regno==8547)
+   {
+    cout<<"Vehicle Registration number : KA19FG8547"<<endl;
+    cout<<"Owner Name : Dhanush"<<endl;
+    cout<<"State : KARNATAKA"<<endl;
+    cout<<"RTO : Mangaluru"<<endl;
+    cout<<"Vehicle Type : Car"<<endl;
+   }
+   if(regno==8987)
+   {
+    cout<<"Vehicle Registration number : KA01TY8987"<<endl;
+    cout<<"Owner Name : Hruday"<<endl;
+    cout<<"State : KARNATAKA"<<endl;
+    cout<<"RTO : Bengaluru South"<<endl;
+    cout<<"Vehicle Type : Bike"<<endl;
+   }
+   if(regno==9989)
+   {
+    cout<<"Vehicle Registration number : PY03WN9989"<<endl;
+    cout<<"Owner Name : Geetha"<<endl;
+    cout<<"State : PUDUCHERRY"<<endl;
+    cout<<"RTO : Pondicherry"<<endl;
+    cout<<"Vehicle Type : Car"<<endl;
+   }
+   if(regno==9999)
+   {
+    cout<<"Vehicle Registration number : MH47JK9999"<<endl;
+    cout<<"Owner Name : Kiran"<<endl;
+    cout<<"State : MAHARASHTRA"<<endl;
+    cout<<"RTO : Mumbai South"<<endl;
+    cout<<"Vehicle Type : Bike"<<endl;
+   }
+    }
+    
+  } 
+	return 0;
+  
+}
